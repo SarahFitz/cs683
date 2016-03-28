@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Assignment1</string>
+    <string name="homeWelcomeMessage">Welcome to the training routine generator!</string>
+    <string name="trickEntryInstructions">Please select the tricks below which your dog already knows.</string>
+    <string name="sit">Sit</string>
+    <string name="stay">Stay</string>
+    <string name="down">Down</string>
+    <string name="stand">Stand</string>
+    <string name="recall">Recall (Come)</string>
+    <string name="beg">Beg</string>
+    <string name="buttonNext">Next</string>
+    <string name="title_activity_launch">LaunchActivity</string>
+    <string name="buttonLetsGetStarted">Let\'s Get Started</string>
+    <string name="welcomeTitle">Dog Training Routine Generator</string>
+    <string name="welcomeQuestionOne">Does your dog always run through the same routine?</string>
+    <string name="welcomeQuestionTwo">Would you like to stimulate your dog\'s mind with a unique trick routine every time you train?</string>
+    <string name="welcomeText">If yes, then we\'re here to help!</string>
+    <string name="title_activity_trick_start">TrickStartActivity</string>
+    <string name="trickCounterMessage">Please enter the total number of tricks you would like your dog to perform during the training routine.</string>
+    <string name="title_activity_trick_selection">TrickSelectionActivity</string>
+    <string name="buttonStartTraining">Start Your Training!</string>
+</resources>
