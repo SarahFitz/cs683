@@ -27,73 +27,160 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        style="@style/TextAppearance.AppCompat.Headline" />
+        style="@style/TextAppearance.AppCompat.Medium" />
 
-    <CheckBox
+    <GridLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/sit"
-        android:id="@+id/sitCheckBox"
-        android:layout_marginTop="16dp"
-        android:checked="false"
+        android:columnCount="9"
+        android:rowCount="4"
+        android:id="@+id/trickSelectionGridLayout"
+        android:columnOrderPreserved="false"
+        android:layout_alignParentBottom="false"
+        android:layout_below="@+id/textView"
+        android:layout_toLeftOf="@+id/submitTricks"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/textView" />
+        android:layout_alignParentStart="true">
 
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/stay"
-        android:id="@+id/stayCheckBox"
-        android:checked="false"
-        android:layout_marginLeft="116dp"
-        android:layout_marginStart="116dp"
-        android:layout_above="@+id/imageView"
-        android:layout_toRightOf="@+id/imageView3"
-        android:layout_toEndOf="@+id/imageView3" />
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sit"
+            android:id="@+id/sitCheckBox"
+            android:layout_marginTop="16dp"
+            android:checked="false"
+            android:layout_row="0"
+            android:layout_column="0"
+            android:layout_marginRight="24dp"
+            android:layout_marginEnd="24dp"/>
 
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/down"
-        android:id="@+id/downCheckBox"
-        android:checked="false"
-        android:layout_marginTop="17dp"
-        android:layout_below="@+id/imageView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView5"
+            android:src="@drawable/recall"
+            android:contentDescription="@string/recall"
+            android:layout_row="1"
+            android:layout_column="1"
+            android:layout_marginRight="24dp"
+            android:layout_marginEnd="24dp" />
 
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/stand"
-        android:id="@+id/standCheckBox"
-        android:checked="false"
-        android:layout_marginLeft="81dp"
-        android:layout_marginStart="81dp"
-        android:layout_alignTop="@+id/stayCheckBox"
-        android:layout_toRightOf="@+id/comeCheckBox"
-        android:layout_toEndOf="@+id/comeCheckBox" />
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/stand"
+            android:id="@+id/standCheckBox"
+            android:checked="false"
+            android:layout_row="2"
+            android:layout_column="0"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="24dp"
+            android:layout_marginEnd="24dp" />
 
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/recall"
-        android:id="@+id/comeCheckBox"
-        android:checked="false"
-        android:layout_above="@+id/imageView3"
-        android:layout_alignLeft="@+id/imageView2"
-        android:layout_alignStart="@+id/imageView2" />
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/stay"
+            android:id="@+id/stayCheckBox"
+            android:checked="false"
+            android:layout_column="1"
+            android:layout_row="2"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="24dp"
+            android:layout_marginEnd="24dp"/>
 
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/beg"
-        android:id="@+id/begCheckBox"
-        android:checked="false"
-        android:layout_alignTop="@+id/comeCheckBox"
-        android:layout_alignLeft="@+id/imageView4"
-        android:layout_alignStart="@+id/imageView4" />
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/down"
+            android:id="@+id/downCheckBox"
+            android:checked="false"
+            android:layout_marginTop="16dp"
+            android:layout_row="2"
+            android:layout_column="2"
+            android:layout_marginRight="24dp"
+            android:layout_marginEnd="24dp"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView4"
+            android:src="@drawable/stand"
+            android:contentDescription="@string/stand"
+            android:layout_row="3"
+            android:layout_column="0"
+            android:layout_marginRight="24dp"
+            android:layout_marginEnd="24dp" />
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/recall"
+            android:id="@+id/comeCheckBox"
+            android:checked="false"
+            android:layout_marginTop="16dp"
+            android:layout_row="0"
+            android:layout_column="1"
+            android:layout_marginRight="24dp"
+            android:layout_marginEnd="24dp" />
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/beg"
+            android:id="@+id/begCheckBox"
+            android:checked="false"
+            android:layout_row="0"
+            android:layout_column="2"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="24dp"
+            android:layout_marginEnd="24dp"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView2"
+            android:src="@drawable/stay"
+            android:contentDescription="@string/stay"
+            android:layout_column="0"
+            android:layout_row="1"
+            android:layout_marginRight="24dp"
+            android:layout_marginEnd="24dp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView"
+            android:src="@drawable/sit"
+            android:contentDescription="@string/sit"
+            android:layout_row="3"
+            android:layout_column="1"
+            android:layout_marginRight="24dp"
+            android:layout_marginEnd="24dp"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView6"
+            android:src="@drawable/beg"
+            android:contentDescription="@string/beg"
+            android:layout_row="1"
+            android:layout_column="2"
+            android:layout_marginRight="24dp"
+            android:layout_marginEnd="24dp"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView3"
+            android:src="@drawable/down"
+            android:contentDescription="@string/down"
+            android:layout_row="3"
+            android:layout_column="2"
+            android:layout_marginRight="24dp"
+            android:layout_marginEnd="24dp"/>
+
+    </GridLayout>
 
     <Button
         android:layout_width="wrap_content"
@@ -102,67 +189,8 @@
         android:id="@+id/submitTricks"
         android:onClick=""
         style="@style/Base.Widget.AppCompat.Button.Colored"
-        android:layout_alignParentBottom="true"
-        android:layout_alignEnd="@+id/textView" />
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageView"
-        android:src="@drawable/sit"
-        android:layout_below="@+id/sitCheckBox"
-        android:layout_alignLeft="@+id/imageView3"
-        android:layout_alignStart="@+id/imageView3"
-        android:contentDescription="@string/sit" />
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageView2"
-        android:src="@drawable/stay"
-        android:contentDescription="@string/stay"
-        android:layout_alignBottom="@+id/imageView4"
-        android:layout_alignLeft="@+id/stayCheckBox"
-        android:layout_alignStart="@+id/stayCheckBox" />
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageView3"
-        android:src="@drawable/down"
-        android:layout_below="@+id/downCheckBox"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:contentDescription="@string/down" />
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageView4"
-        android:src="@drawable/stand"
-        android:contentDescription="@string/stand"
-        android:layout_below="@+id/standCheckBox"
-        android:layout_alignLeft="@+id/standCheckBox"
-        android:layout_alignStart="@+id/standCheckBox" />
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageView5"
-        android:src="@drawable/recall"
-        android:contentDescription="@string/recall"
-        android:layout_below="@+id/comeCheckBox"
-        android:layout_alignLeft="@+id/comeCheckBox"
-        android:layout_alignStart="@+id/comeCheckBox" />
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageView6"
-        android:src="@drawable/beg"
-        android:contentDescription="@string/beg"
-        android:layout_alignTop="@+id/imageView5"
-        android:layout_alignLeft="@+id/begCheckBox"
-        android:layout_alignStart="@+id/begCheckBox" />
+        android:layout_alignBottom="@+id/trickSelectionGridLayout"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

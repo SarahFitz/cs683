@@ -20,28 +20,33 @@ public class TrickSelectionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trick_selection);
 
-        //Set up click event for button to navigate to next activity
-        Button submitTricksButton = (Button) findViewById(R.id.submitTricks);
         //create intent to instantiate new activity
         final Intent trickStartIntent = new Intent(this, TrickStartActivity.class);
-        submitTricksButton.setOnClickListener(new View.OnClickListener() {
-            //when button is clicked, start the next activity
-            public void onClick(View v) {
-                Log.i(TAG, "submitTrickButton onClick validate");
-                List<String> tricks = validateSubmission();
 
-                //check that tricks were selected
-                if(tricks.size() > 0){
-                    Log.i(TAG, "submitTrickButton onClick startActivity");
-                    //add the list of tricks to the intent to send to next activity
-                    trickStartIntent.putStringArrayListExtra("tricks", (ArrayList)tricks);
-                    startActivity(trickStartIntent);
-                }else{
-                    //TODO: some error scenario
+        //Set up click event for button to navigate to next activity
+        Button submitTricksButton = (Button) findViewById(R.id.submitTricks);
+        if(submitTricksButton != null) {
+            submitTricksButton.setOnClickListener(new View.OnClickListener() {
+                //when button is clicked, start the next activity
+                public void onClick(View v) {
+                    Log.i(TAG, "submitTrickButton onClick validate");
+                    List<String> tricks = validateSubmission();
+
+                    //check that tricks were selected
+                    if(tricks != null && tricks.size() > 0){
+                        Log.i(TAG, "submitTrickButton onClick startActivity");
+                        //add the list of tricks to the intent to send to next activity
+                        trickStartIntent.putStringArrayListExtra("tricks", (ArrayList)tricks);
+                        startActivity(trickStartIntent);
+                    }else{
+                        //TODO: some error scenario
+                    }
+
                 }
+            });
+        }
 
-            }
-        });
+
     }
 
 

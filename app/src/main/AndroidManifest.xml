@@ -13,15 +13,22 @@
             android:label="Training Routine Generator">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".TrickSelectionActivity"
-            android:label="Set Your Tricks"/>
+            android:label="Set Your Tricks" />
         <activity
             android:name=".TrickStartActivity"
-            android:label="Start Your Training"/>
+            android:label="Start Your Training" />
+        <activity
+            android:name=".TrickActivity"
+            android:label="@string/title_activity_trick"/>
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
     </application>
 
 </manifest>
