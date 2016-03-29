@@ -19,4 +19,5 @@
     <string name="trickCounterMessage">Please enter the total number of tricks you would like your dog to perform during the training routine.</string>
     <string name="title_activity_trick_selection">TrickSelectionActivity</string>
     <string name="buttonStartTraining">Start Your Training!</string>
+    <string name="trickSelectionGridLayout">trickSelectionIdLayout</string>
 </resources>
