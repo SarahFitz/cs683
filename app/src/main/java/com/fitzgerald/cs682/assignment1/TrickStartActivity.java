@@ -86,7 +86,7 @@ public class TrickStartActivity extends AppCompatActivity {
                             Log.i(TAG, "num tricks = "+numTricks);
                         }
 
-                        //generate the list of tricks
+                        //generate the list of tricks based on the number they chose
                         ArrayList<String> toDoTricks = new ArrayList<>();
                         Random rand = new Random();
                         Log.i(TAG, "Random tricks list");
@@ -95,9 +95,9 @@ public class TrickStartActivity extends AppCompatActivity {
                             Log.i(TAG, "Random tricks = "+toDoTricks.get(i));
                         }
 
+                        //pass the list of tricks to do to the next activity
                         trickIntent.putStringArrayListExtra("toDoTricks", toDoTricks);
                         startActivity(trickIntent);
-
                     }
                 });
             }
