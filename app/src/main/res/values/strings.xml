@@ -16,7 +16,7 @@
     <string name="welcomeQuestionTwo">Would you like to stimulate your dog\'s mind with a unique trick routine every time you train?</string>
     <string name="welcomeText">If yes, then we\'re here to help!</string>
     <string name="title_activity_trick_start">TrickStartActivity</string>
-    <string name="trickCounterMessage">Please enter the total number of tricks you would like your dog to perform during the training routine.</string>
+    <string name="trickCounterMessage">Please select the total number of tricks for your dog to perform during the training routine.</string>
     <string name="title_activity_trick_selection">TrickSelectionActivity</string>
     <string name="buttonStartTraining">Start Your Training!</string>
     <string name="trickSelectionGridLayout">trickSelectionIdLayout</string>
