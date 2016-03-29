@@ -23,6 +23,8 @@ public class TrickActivityFragment extends Fragment {
     private static final Map<String, String> trickImageMap;
     private static final String TAG = "TrickActivityFragment";
 
+    //static maps which stores the name of the trick,
+    // paired with the integer id of the image
     static {
         Map<String, String> map = new HashMap<>();
         map.put("Sit", String.valueOf(R.drawable.sit));
@@ -34,12 +36,18 @@ public class TrickActivityFragment extends Fragment {
         trickImageMap = Collections.unmodifiableMap(map);
     }
 
+    //This is created, but not implemented yet
+    //will be used to handle button clicks
     TrickListener activityCallback;
 
+    //This is created, but not implemented yet
+    //will be used to handle button clicks
     public interface TrickListener {
         //TODO: Do something
     }
 
+    //This is created, but not implemented yet
+    //will be used to handle button clicks
     @Override
     public void onAttach(Activity activity){
         super.onAttach(activity);
@@ -57,17 +65,21 @@ public class TrickActivityFragment extends Fragment {
 
         Log.i(TAG, "onCreate");
         Log.i(TAG, " bundle values: " + getArguments().toString());
-        ArrayList<String> tricksList = getArguments().getStringArrayList("trickList");
 
+        //get the values from the bundle
+        ArrayList<String> tricksList = getArguments().getStringArrayList("trickList");
         View view = inflater.inflate(R.layout.fragment_trick, container, false);
 
         if(trickImageMap != null && tricksList !=null && view!= null){
             currentTrickNum = 0;
+
+            //set the name of the initial trick
             TextView trickName = (TextView) view.findViewById(R.id.trickName);
             if(trickName != null){
                 trickName.setText(tricksList.get(currentTrickNum));
             }
 
+            //set the image of the initial trick
             ImageView trickImage = (ImageView) view.findViewById(R.id.trickImage);
             trickImage.setImageResource(Integer.parseInt(trickImageMap.get(tricksList.get(currentTrickNum))));
 

@@ -30,6 +30,7 @@ public class TrickActivity extends Activity implements  TrickActivityFragment.Tr
             //setup the fragment
             TrickActivityFragment fragment = new TrickActivityFragment();
 
+            //past the trick list to the fragment in a bundle
             Bundle bundle = new Bundle();
             bundle.putStringArrayList("trickList", tricks);
             fragment.setArguments(bundle);
@@ -37,10 +38,6 @@ public class TrickActivity extends Activity implements  TrickActivityFragment.Tr
 
             getFragmentManager().beginTransaction().add(R.id.activityTrick, fragment).commit();
         }
-    }
-
-    public void onClick(){
-
     }
 
     @Override
