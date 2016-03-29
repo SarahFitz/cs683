@@ -4,15 +4,20 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class TrickStartActivity extends AppCompatActivity {
 
     private static final String TAG = "TrickStartActivity";
     private TextView trickSeekBarValue;
+    private List<String> tricks;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +26,7 @@ public class TrickStartActivity extends AppCompatActivity {
 
         //get the list of tricks that the user selected from the previous page
         Intent intent = getIntent();
-        List<String> tricks = intent.getStringArrayListExtra("tricks");
+        tricks = intent.getStringArrayListExtra("tricks");
         if(tricks !=null && tricks.size()>0){
             //TODO: validate populated list and not null
 
@@ -35,7 +40,7 @@ public class TrickStartActivity extends AppCompatActivity {
             }
 
             //set the seek bar max length based to be Nx2 the number of tricks the user entered
-            SeekBar trickSeekBar = (SeekBar) findViewById(R.id.trickSeekBar);
+            final SeekBar trickSeekBar = (SeekBar) findViewById(R.id.trickSeekBar);
             if(trickSeekBar != null){
                 trickSeekBar.setMax(tricks.size() * 2);
 
@@ -61,8 +66,43 @@ public class TrickStartActivity extends AppCompatActivity {
                     });
                 }
             }
+
+            //create intent to instantiate new activity
+            final Intent trickIntent = new Intent(this, TrickActivity.class);
+
+            //Set up click event for button to navigate to next activity
+            Button startTrainingButton = (Button) findViewById(R.id.startTrainingButton);
+            if(startTrainingButton != null) {
+                startTrainingButton.setOnClickListener(new View.OnClickListener() {
+                    //when button is clicked, start the next activity
+                    public void onClick(View v) {
+                        Log.i(TAG, "startTrainingButton onClick");
+
+                        //get the number of tricks they want to perform
+                        int numTricks = 0;
+                        trickSeekBarValue = (TextView) findViewById(R.id.trickSeekBarValue);
+                        if(trickSeekBarValue !=null){
+                            numTricks = trickSeekBar.getProgress();
+                            Log.i(TAG, "num tricks = "+numTricks);
+                        }
+
+                        //generate the list of tricks
+                        ArrayList<String> toDoTricks = new ArrayList<>();
+                        Random rand = new Random();
+                        Log.i(TAG, "Random tricks list");
+                        for( int i = 0; i < numTricks; i++){
+                            toDoTricks.add(tricks.get(rand.nextInt(tricks.size())));
+                            Log.i(TAG, "Random tricks = "+toDoTricks.get(i));
+                        }
+
+                        trickIntent.putStringArrayListExtra("toDoTricks", toDoTricks);
+                        startActivity(trickIntent);
+
+                    }
+                });
+            }
         }
-        //TODO: setup click event for next states
+
     }
 
 

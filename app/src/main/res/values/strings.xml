@@ -20,4 +20,6 @@
     <string name="title_activity_trick_selection">TrickSelectionActivity</string>
     <string name="buttonStartTraining">Start Your Training!</string>
     <string name="trickSelectionGridLayout">trickSelectionIdLayout</string>
+    <string name="title_activity_trick">TrickActivity</string>
+    <string name="action_settings">Settings</string>
 </resources>
