@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class TrickActivity extends Activity implements  TrickActivityFragment.TrickListener{
 
-    private static final String TAG = "TrickActivity";
+    private static final String TAG = "appLog TrickActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

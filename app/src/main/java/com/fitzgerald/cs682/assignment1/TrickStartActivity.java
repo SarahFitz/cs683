@@ -15,7 +15,7 @@ import java.util.Random;
 
 public class TrickStartActivity extends AppCompatActivity {
 
-    private static final String TAG = "TrickStartActivity";
+    private static final String TAG = "appLog TrickStartActiv";
     private TextView trickSeekBarValue;
     private List<String> tricks;
 

@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TrickSelectionActivity extends AppCompatActivity {
-    private static final String TAG = "TrickSelectActivity";
+    private static final String TAG = "appLog TrickSelectActiv";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

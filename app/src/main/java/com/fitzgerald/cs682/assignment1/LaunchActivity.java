@@ -9,7 +9,7 @@ import android.widget.Button;
 
 public class LaunchActivity extends AppCompatActivity {
 
-    private static final String TAG = "LaunchActivity";
+    private static final String TAG = "appLog LaunchActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
