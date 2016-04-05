@@ -19,7 +19,7 @@ public class LaunchActivity extends AppCompatActivity {
         //Set up click event for button to navigate to next activity
         Button getStartedButton = (Button) findViewById(R.id.getStarted);
         //create intent to instantiate new activity
-        final Intent selectDogIntent = new Intent(this, SelectDog.class);
+        final Intent selectDogIntent = new Intent(this, SelectDogActivity.class);
         getStartedButton.setOnClickListener(new View.OnClickListener()
         {
             //when button is clicked, start the next activity

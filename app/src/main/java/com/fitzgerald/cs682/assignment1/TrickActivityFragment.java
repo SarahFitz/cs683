@@ -26,6 +26,7 @@ public class TrickActivityFragment extends Fragment {
     private View view;
     private ArrayList<String> tricksList;
     private ArrayList<ArrayList <String>> trickCompleteList = new ArrayList<>();
+    private String dogName;
 
     //static maps which stores the name of the trick,
     // paired with the integer id of the image
@@ -40,14 +41,13 @@ public class TrickActivityFragment extends Fragment {
         trickImageMap = Collections.unmodifiableMap(map);
     }
 
-    //This is created, but not implemented yet
-    //will be used to handle button clicks
+    //Listener to be implemented by the activity
     TrickListener activityCallback;
 
-    //This is created, but not implemented yet
-    //will be used to handle button clicks
+
     public interface TrickListener {
-        //TODO: Do something
+        //This passes the completed trick info back to the activity
+        void tricksCompleted(ArrayList<ArrayList <String>> trickCompleteList);
     }
 
     //This is created, but not implemented yet
@@ -117,7 +117,7 @@ public class TrickActivityFragment extends Fragment {
         if(this.currentTrickNum+1 == this.tricksList.size()){
             Log.i(TAG, "that was the last trick!");
             Log.i(TAG, "tricks completed list: "+ android.text.TextUtils.join(", ", this.trickCompleteList));
-            //TODO: call method in activity to go to next activity
+            activityCallback.tricksCompleted(this.trickCompleteList);
         }else{
             //increment the trick number and set the UI data
             this.currentTrickNum++;
@@ -133,7 +133,7 @@ public class TrickActivityFragment extends Fragment {
         if(this.currentTrickNum+1 == this.tricksList.size()){
             Log.i(TAG, "that was the last trick!");
             Log.i(TAG, "tricks completed list: "+ android.text.TextUtils.join(", ", this.trickCompleteList));
-            //TODO: call method in activity to go to next activity
+            activityCallback.tricksCompleted(this.trickCompleteList);
         }else{
             //increment the trick number and set the UI data
             this.currentTrickNum++;

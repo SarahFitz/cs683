@@ -20,8 +20,8 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class SelectDog extends Activity {
-    private static final String TAG = "appLog SelectDog";
+public class SelectDogActivity extends Activity {
+    private static final String TAG = "appLog SelectDogActiv";
     //TODO: remove this eventually
     ArrayList<String> dogNames;
     ArrayList<ArrayList <String>> dogProfiles;
@@ -126,7 +126,7 @@ public class SelectDog extends Activity {
     }
 
     private void setSpinnerData(){
-        //TODO: get list of dog profiles from DB
+        //get the list of dog names from the file storage
         this.dogNames = getDogNames();
 
         Spinner spinner = (Spinner) findViewById(R.id.dogSpinner);
@@ -134,15 +134,17 @@ public class SelectDog extends Activity {
         Button selectDogButton = (Button) findViewById(R.id.selectDogButton);
 
         if(dogNames.size() <= 0){
+            //if no dogs exist, hide these features
             spinner.setVisibility(View.INVISIBLE);
             deleteDogButton.setVisibility(View.INVISIBLE);
             selectDogButton.setVisibility(View.INVISIBLE);
         }else{
-            //set spinner values as existing dog profile names
+            //dogs exist, so show these features
             spinner.setVisibility(View.VISIBLE);
             deleteDogButton.setVisibility(View.VISIBLE);
             selectDogButton.setVisibility(View.VISIBLE);
 
+            //set the dog profile names as the data for the spinner
             ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, dogNames);
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             spinner.setAdapter(adapter);
@@ -189,7 +191,6 @@ public class SelectDog extends Activity {
                         Log.i(TAG, "Dog profile from FILE : " + profile[i]);
                         dogProfiles.add(new ArrayList<>(Arrays.asList(profile)));
                     }
-
                 }
                 inputStream.close();
             }

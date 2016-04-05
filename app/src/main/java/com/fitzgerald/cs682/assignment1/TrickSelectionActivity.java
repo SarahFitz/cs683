@@ -29,7 +29,7 @@ public class TrickSelectionActivity extends AppCompatActivity {
         Log.i(TAG, "the dog name is: "+dogName);
 
         //create intent to instantiate new activity
-        final Intent selectDogIntent = new Intent(this, SelectDog.class);
+        final Intent selectDogIntent = new Intent(this, SelectDogActivity.class);
 
         //Set up click event for button to navigate to next activity
         Button submitTricksButton = (Button) findViewById(R.id.submitTricks);
@@ -40,7 +40,7 @@ public class TrickSelectionActivity extends AppCompatActivity {
                     Log.i(TAG, "submitTrickButton onClick validate");
                     List<String> tricks = validateSubmission();
 
-                    //TODO: add profile to storage
+                    //add profile to internal file storage
                     addDogProfile(dogName, tricks);
 
                     //check that tricks were selected
@@ -50,12 +50,9 @@ public class TrickSelectionActivity extends AppCompatActivity {
                     }else{
                         //TODO: some error scenario
                     }
-
                 }
             });
         }
-
-
     }
 
     private List<String> validateSubmission(){
