@@ -20,6 +20,11 @@
     <string name="title_activity_trick_selection">TrickSelectionActivity</string>
     <string name="buttonStartTraining">Start Your Training!</string>
     <string name="trickSelectionGridLayout">trickSelectionIdLayout</string>
-    <string name="title_activity_trick">TrickActivity</string>
+    <string name="title_activity_trick">Time to Train!</string>
     <string name="action_settings">Settings</string>
+    <string name="trick">trick</string>
+    <string name="skip">Skip</string>
+    <string name="next">Next</string>
+    <string name="title_activity_select_dog">SelectDog</string>
+    <string name="title_activity_trick_results">TrickResultsActivity</string>
 </resources>

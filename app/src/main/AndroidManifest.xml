@@ -25,10 +25,18 @@
             android:label="Start Your Training" />
         <activity
             android:name=".TrickActivity"
-            android:label="@string/title_activity_trick"/>
+            android:label="Time to Train!" />
+
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+
+        <activity
+            android:name=".SelectDogActivity"
+            android:label="@string/title_activity_select_dog" />
+        <activity
+            android:name=".TrickResultsActivity"
+            android:label="@string/title_activity_trick_results"></activity>
     </application>
 
 </manifest>

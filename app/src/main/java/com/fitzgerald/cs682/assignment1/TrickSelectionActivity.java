@@ -1,5 +1,6 @@
 package com.fitzgerald.cs682.assignment1;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -9,19 +10,26 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 public class TrickSelectionActivity extends AppCompatActivity {
-    private static final String TAG = "TrickSelectActivity";
+    private static final String TAG = "appLog TrickSelectActiv";
+    private String dogName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trick_selection);
 
+        //get the dog name that the user entered from the previous page
+        Intent intent = getIntent();
+        this.dogName = intent.getExtras().getString("dogName");
+        Log.i(TAG, "the dog name is: "+dogName);
+
         //create intent to instantiate new activity
-        final Intent trickStartIntent = new Intent(this, TrickStartActivity.class);
+        final Intent selectDogIntent = new Intent(this, SelectDogActivity.class);
 
         //Set up click event for button to navigate to next activity
         Button submitTricksButton = (Button) findViewById(R.id.submitTricks);
@@ -32,23 +40,20 @@ public class TrickSelectionActivity extends AppCompatActivity {
                     Log.i(TAG, "submitTrickButton onClick validate");
                     List<String> tricks = validateSubmission();
 
+                    //add profile to internal file storage
+                    addDogProfile(dogName, tricks);
+
                     //check that tricks were selected
                     if(tricks != null && tricks.size() > 0){
                         Log.i(TAG, "submitTrickButton onClick startActivity");
-                        //add the list of tricks to the intent to send to next activity
-                        trickStartIntent.putStringArrayListExtra("tricks", (ArrayList)tricks);
-                        startActivity(trickStartIntent);
+                        startActivity(selectDogIntent);
                     }else{
                         //TODO: some error scenario
                     }
-
                 }
             });
         }
-
-
     }
-
 
     private List<String> validateSubmission(){
         List<String> tricks = new ArrayList<>();
@@ -77,6 +82,19 @@ public class TrickSelectionActivity extends AppCompatActivity {
         checkBoxes.add((CheckBox) findViewById(R.id.begCheckBox));
         checkBoxes.add((CheckBox) findViewById(R.id.comeCheckBox));
         return checkBoxes;
+    }
+
+    private void addDogProfile(String name, List<String> tricks){
+        String filename = "dogProfiles.txt";
+        String string = name + "," + android.text.TextUtils.join(",", tricks)+"/n";
+        FileOutputStream outputStream = null;
+        try {
+            outputStream = openFileOutput(filename, Context.MODE_APPEND | Context.MODE_PRIVATE);
+            outputStream.write(string.getBytes());
+            outputStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

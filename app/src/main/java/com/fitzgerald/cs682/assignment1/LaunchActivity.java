@@ -9,7 +9,7 @@ import android.widget.Button;
 
 public class LaunchActivity extends AppCompatActivity {
 
-    private static final String TAG = "LaunchActivity";
+    private static final String TAG = "appLog LaunchActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,13 +19,13 @@ public class LaunchActivity extends AppCompatActivity {
         //Set up click event for button to navigate to next activity
         Button getStartedButton = (Button) findViewById(R.id.getStarted);
         //create intent to instantiate new activity
-        final Intent trickSelectIntent = new Intent(this, TrickSelectionActivity.class);
+        final Intent selectDogIntent = new Intent(this, SelectDogActivity.class);
         getStartedButton.setOnClickListener(new View.OnClickListener()
         {
             //when button is clicked, start the next activity
             public void onClick(View v) {
                 Log.i(TAG, "getStartedButton onClick startActivity");
-                startActivity(trickSelectIntent);
+                startActivity(selectDogIntent);
             }
         });
     }

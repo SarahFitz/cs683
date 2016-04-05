@@ -6,47 +6,64 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.fitzgerald.cs682.assignment1.TrickActivityFragment">
+    tools:context="com.fitzgerald.cs682.assignment1.TrickActivityFragment"
+    android:textAlignment="center">
 
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/trickImage"
-        android:contentDescription="trick"
-        android:minHeight="20dp"
-        android:minWidth="20dp"
-        android:nestedScrollingEnabled="false"
+        android:contentDescription="@string/trick"
+        android:minHeight="100dp"
+        android:minWidth="100dp"
+        android:layout_above="@+id/trickName"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="24dp" />
+        android:layout_marginBottom="62dp"
+        android:layout_alignParentLeft="false" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:id="@+id/trickName"
-        android:layout_below="@+id/trickImage"
+        android:minWidth="100dp"
+        android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="121dp" />
+        android:textAlignment="center" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Skip"
+        android:text="@string/skip"
         android:id="@+id/skipButton"
-        android:layout_alignParentBottom="true"
-        android:layout_toLeftOf="@+id/trickImage"
-        android:layout_toStartOf="@+id/trickImage"
-        android:layout_marginBottom="153dp"
-        style="@style/Base.Widget.AppCompat.Button.Colored" />
+        style="@style/Base.Widget.AppCompat.Button.Colored"
+        android:layout_marginTop="75dp"
+        android:layout_below="@+id/trickName"
+        android:layout_alignRight="@+id/trickName"
+        android:layout_alignEnd="@+id/trickName"
+        android:layout_marginRight="63dp"
+        android:layout_marginEnd="63dp" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Next"
+        android:text="@string/next"
         android:id="@+id/nextButton"
-        android:layout_alignBottom="@+id/skipButton"
+        android:background="@android:color/holo_green_light"
+        android:layout_alignTop="@+id/skipButton"
         android:layout_alignLeft="@+id/trickName"
         android:layout_alignStart="@+id/trickName"
-        android:background="@android:color/holo_green_light" />
+        android:layout_marginLeft="65dp"
+        android:layout_marginStart="65dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/trickNumber"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center"
+        android:minWidth="100dp" />
 </RelativeLayout>

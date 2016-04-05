@@ -15,9 +15,10 @@ import java.util.Random;
 
 public class TrickStartActivity extends AppCompatActivity {
 
-    private static final String TAG = "TrickStartActivity";
+    private static final String TAG = "appLog TrickStartActiv";
     private TextView trickSeekBarValue;
     private List<String> tricks;
+    private String dogName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,13 +28,15 @@ public class TrickStartActivity extends AppCompatActivity {
         //get the list of tricks that the user selected from the previous page
         Intent intent = getIntent();
         tricks = intent.getStringArrayListExtra("tricks");
+        dogName = intent.getExtras().getString("dogName");
+
         if(tricks !=null && tricks.size()>0){
             //TODO: validate populated list and not null
 
             Log.i(TAG, "The dog knows the tricks: " + android.text.TextUtils.join(", ", tricks));
 
             //Add the text message based on the number of tricks the user selected
-            String trickMessage = "Your dog knows " + tricks.size() + " unique tricks!";
+            String trickMessage = dogName + " knows " + tricks.size() + " unique tricks!";
             TextView trickTextMessage = (TextView) findViewById(R.id.trickTextMessage);
             if(trickTextMessage != null){
                 trickTextMessage.setText(trickMessage);
@@ -97,6 +100,7 @@ public class TrickStartActivity extends AppCompatActivity {
 
                         //pass the list of tricks to do to the next activity
                         trickIntent.putStringArrayListExtra("toDoTricks", toDoTricks);
+                        trickIntent.putExtra("dogName", dogName);
                         startActivity(trickIntent);
                     }
                 });
