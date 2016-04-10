@@ -46,7 +46,7 @@
         android:layout_height="wrap_content"
         android:text="@string/buttonStartTraining"
         android:id="@+id/startTrainingButton"
-        android:background="@android:color/holo_green_light"
+        android:background="@drawable/custom_button_green"
         android:paddingEnd="6dp"
         android:paddingStart="6dp"
         android:layout_marginTop="84dp"

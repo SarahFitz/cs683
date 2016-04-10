@@ -9,11 +9,18 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".SelectDogActivity">
 
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+    </android.support.design.widget.AppBarLayout>
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Add New Dog"
         android:id="@+id/addNewDogButton"
+        android:background="@drawable/custom_button_green"
         android:layout_marginLeft="32dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="104dp"
@@ -36,6 +43,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Select Dog"
+        android:background="@drawable/custom_button_green"
         android:id="@+id/selectDogButton"
         android:layout_marginTop="34dp"
         android:layout_below="@+id/dogSpinner"
@@ -47,6 +55,7 @@
         android:layout_height="wrap_content"
         android:text="Delete Dog"
         android:id="@+id/deleteDogButton"
+        android:background="@drawable/custom_button_pink"
         android:layout_alignBottom="@+id/selectDogButton"
         android:layout_toRightOf="@+id/addNewDogButton"
         android:layout_toEndOf="@+id/addNewDogButton" />
