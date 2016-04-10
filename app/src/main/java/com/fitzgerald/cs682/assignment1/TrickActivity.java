@@ -84,6 +84,13 @@ public class TrickActivity extends AppCompatActivity implements  TrickActivityFr
     }
 
     @Override
+    public void onBackPressed()
+    {
+        Intent intent = new Intent(this,SelectDogActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
     protected void onStart() {
         super.onStart();
         Log.i(TAG, "onStart");
