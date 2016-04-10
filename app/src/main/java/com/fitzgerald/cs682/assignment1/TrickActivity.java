@@ -1,16 +1,16 @@
 package com.fitzgerald.cs682.assignment1;
 
-import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 
 import java.util.ArrayList;
 
-public class TrickActivity extends Activity implements  TrickActivityFragment.TrickListener{
+public class TrickActivity extends AppCompatActivity implements  TrickActivityFragment.TrickListener{
 
     private static final String TAG = "appLog TrickActivity";
     private String dogName;

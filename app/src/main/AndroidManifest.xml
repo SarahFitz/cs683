@@ -17,6 +17,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".SelectDogActivity"
+            android:label="Select Your Dog" />
+
         <activity
             android:name=".TrickSelectionActivity"
             android:label="Set Your Tricks" />
@@ -25,18 +30,15 @@
             android:label="Start Your Training" />
         <activity
             android:name=".TrickActivity"
-            android:label="Time to Train!" />
+            android:label="Now Training" />
+        <activity
+            android:name=".TrickResultsActivity"
+            android:label="Training Results" />
 
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity
-            android:name=".SelectDogActivity"
-            android:label="@string/title_activity_select_dog" />
-        <activity
-            android:name=".TrickResultsActivity"
-            android:label="@string/title_activity_trick_results"></activity>
     </application>
 
 </manifest>

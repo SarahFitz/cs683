@@ -9,12 +9,52 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.fitzgerald.cs682.assignment1.TrickResultsActivity">
 
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+    </android.support.design.widget.AppBarLayout>
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Large Text"
+        android:id="@+id/trickResultsHeading" />
+
     <LinearLayout
         android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:id="@+id/resultLayout"></LinearLayout>
+        android:id="@+id/resultLayout"
+        android:layout_marginTop="40dp">
+    </LinearLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Share Results"
+        android:id="@+id/shareResultsButton"
+        android:layout_below="@+id/resultLayout"
+        android:background="@drawable/custom_button_pink"
+        android:layout_alignRight="@+id/resultLayout"
+        android:layout_alignEnd="@+id/resultLayout"
+        android:layout_marginRight="28dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginTop="36dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Start Over"
+        android:background="@drawable/custom_button_green"
+        android:id="@+id/startOverButton"
+        android:layout_alignTop="@+id/shareResultsButton"
+        android:layout_toLeftOf="@+id/shareResultsButton"
+        android:layout_toStartOf="@+id/shareResultsButton"
+        android:layout_marginRight="36dp"
+        android:layout_marginEnd="36dp" />
+
 </RelativeLayout>

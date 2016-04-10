@@ -1,9 +1,9 @@
 package com.fitzgerald.cs682.assignment1;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -20,7 +20,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class SelectDogActivity extends Activity {
+public class SelectDogActivity extends AppCompatActivity {
     private static final String TAG = "appLog SelectDogActiv";
     //TODO: remove this eventually
     ArrayList<String> dogNames;
@@ -31,6 +31,8 @@ public class SelectDogActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_dog);
+
+        this.getSupportActionBar().setDisplayShowTitleEnabled(true);
 
         setSpinnerData();
 
