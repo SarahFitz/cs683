@@ -3,5 +3,11 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="success">#00FF00</color>
+    <color name="success">#ff99cc00</color>
+
+    <color name="green1">#ff99cc00</color>
+    <color name="green2">#228B22</color>
+
+    <color name="pink1">#FFC0CB</color>
+    <color name="pink2">#FF4081</color>
 </resources>
