@@ -24,7 +24,12 @@
 
         <activity
             android:name=".TrickSelectionActivity"
-            android:label="Set Your Tricks" />
+            android:label="Set Your Tricks" >
+            <intent-filter>
+                <action android:name="selectDogTricks"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
         <activity
             android:name=".TrickStartActivity"
             android:label="Start Your Training" />
