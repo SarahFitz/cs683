@@ -1,9 +1,9 @@
 package com.fitzgerald.cs682.assignment1;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -20,9 +20,8 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class SelectDogActivity extends Activity {
+public class SelectDogActivity extends AppCompatActivity {
     private static final String TAG = "appLog SelectDogActiv";
-    //TODO: remove this eventually
     ArrayList<String> dogNames;
     ArrayList<ArrayList <String>> dogProfiles;
 
@@ -36,57 +35,66 @@ public class SelectDogActivity extends Activity {
 
         //Set up click event for ADD dog button
         Button addNewDog = (Button) findViewById(R.id.addNewDogButton);
+        if(addNewDog != null) {
+            addNewDog.setOnClickListener(new View.OnClickListener() {
+                //when button is clicked, start the next activity
+                public void onClick(View v) {
+                    Log.i(TAG, "addNewDog onClick");
+                    addDog();
+                }
+            });
+        }
 
-        addNewDog.setOnClickListener(new View.OnClickListener() {
-            //when button is clicked, start the next activity
-            public void onClick(View v) {
-                Log.i(TAG, "addNewDog onClick");
-                addDog();
-            }
-        });
 
         //Set up click event for SELECT dog button
         Button selectDogButton = (Button) findViewById(R.id.selectDogButton);
-        selectDogButton.setOnClickListener(new View.OnClickListener() {
-            //when button is clicked, start the next activity
-            public void onClick(View v) {
-                Log.i(TAG, "selectDog onClick");
-                selectDog();
-            }
-        });
+        if(selectDogButton != null){
+            selectDogButton.setOnClickListener(new View.OnClickListener() {
+                //when button is clicked, start the next activity
+                public void onClick(View v) {
+                    Log.i(TAG, "selectDog onClick");
+                    selectDog();
+                }
+            });
+        }
+
 
         //Set up click event for DELETE dog button
         Button deleteDogButton = (Button) findViewById(R.id.deleteDogButton);
-        deleteDogButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Log.i(TAG, "deleteDog onClick");
-                deleteDog();
-            }
-        });
+        if(deleteDogButton != null){
+            deleteDogButton.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    Log.i(TAG, "deleteDog onClick");
+                    deleteDog();
+                }
+            });
+        }
     }
 
     private void addDog(){
         EditText dogNameField = (EditText) findViewById(R.id.newDogName);
-        String name = dogNameField.getText().toString();
+        if(dogNameField != null){
+            String name = dogNameField.getText().toString();
 
-        if(name == null || name.isEmpty()){
-            //TODO: error
-        }else{
-            final Intent trickSelectIntent = new Intent(this, TrickSelectionActivity.class);
-            trickSelectIntent.putExtra("dogName", name);
-            startActivity(trickSelectIntent);
+            if(name == null || name.isEmpty()){
+                //TODO: error
+            }else{
+                final Intent trickSelectIntent = new Intent("selectDogTricks");
+                trickSelectIntent.putExtra("dogName", name);
+                startActivity(trickSelectIntent);
+            }
         }
-
     }
 
     private void deleteDog(){
         //get selected dog for deleting
         Spinner spinner = (Spinner) findViewById(R.id.dogSpinner);
-        String name = this.dogNames.get(spinner.getSelectedItemPosition());
-        dogNames.remove(spinner.getSelectedItemPosition());
+        if(spinner != null){
+            String name = this.dogNames.get(spinner.getSelectedItemPosition());
+            dogNames.remove(spinner.getSelectedItemPosition());
 
-        String filename = "dogProfiles.txt";
-        FileOutputStream outputStream = null;
+            String filename = "dogProfiles.txt";
+            FileOutputStream outputStream = null;
             try {
                 outputStream = openFileOutput(filename, Context.MODE_PRIVATE);
                 for(ArrayList<String> profile : this.dogProfiles){
@@ -101,14 +109,20 @@ public class SelectDogActivity extends Activity {
                 e.printStackTrace();
             }
 
-        //update the spinner data
-        setSpinnerData();
+            //update the spinner data
+            setSpinnerData();
+        }
+
     }
 
     private void selectDog(){
         //get selected dog for deleting
         Spinner spinner = (Spinner) findViewById(R.id.dogSpinner);
-        String name = this.dogNames.get(spinner.getSelectedItemPosition());
+        String name = "";
+        if(spinner != null){
+            name = this.dogNames.get(spinner.getSelectedItemPosition());
+        }
+
 
         final Intent trickStartIntent = new Intent(this, TrickStartActivity.class);
         trickStartIntent.putExtra("dogName", name);
@@ -133,27 +147,29 @@ public class SelectDogActivity extends Activity {
         Button deleteDogButton = (Button) findViewById(R.id.deleteDogButton);
         Button selectDogButton = (Button) findViewById(R.id.selectDogButton);
 
-        if(dogNames.size() <= 0){
-            //if no dogs exist, hide these features
-            spinner.setVisibility(View.INVISIBLE);
-            deleteDogButton.setVisibility(View.INVISIBLE);
-            selectDogButton.setVisibility(View.INVISIBLE);
-        }else{
-            //dogs exist, so show these features
-            spinner.setVisibility(View.VISIBLE);
-            deleteDogButton.setVisibility(View.VISIBLE);
-            selectDogButton.setVisibility(View.VISIBLE);
+        if(spinner != null && deleteDogButton != null && selectDogButton != null){
+            if(dogNames.size() <= 0){
+                //if no dogs exist, hide these features
+                spinner.setVisibility(View.INVISIBLE);
+                deleteDogButton.setVisibility(View.INVISIBLE);
+                selectDogButton.setVisibility(View.INVISIBLE);
+            }else{
+                //dogs exist, so show these features
+                spinner.setVisibility(View.VISIBLE);
+                deleteDogButton.setVisibility(View.VISIBLE);
+                selectDogButton.setVisibility(View.VISIBLE);
 
-            //set the dog profile names as the data for the spinner
-            ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, dogNames);
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            spinner.setAdapter(adapter);
+                //set the dog profile names as the data for the spinner
+                ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, dogNames);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinner.setAdapter(adapter);
+            }
         }
     }
 
     /**
      * Get a list of only the dog names from the dog profiles
-     * @return
+     * @return list of dog names
      */
     public ArrayList<String> getDogNames(){
         ArrayList<ArrayList <String>> dogProfiles = getDogProfiles();
@@ -170,7 +186,7 @@ public class SelectDogActivity extends Activity {
 
     /**
      * Get a list of all the dog profiles
-     * @return
+     * @return list of dog profiles
      */
     public ArrayList< ArrayList <String>> getDogProfiles(){
         ArrayList< ArrayList <String>> dogProfiles = new ArrayList<>();
@@ -181,7 +197,7 @@ public class SelectDogActivity extends Activity {
             if ( inputStream != null ) {
                 InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
                 BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-                String receiveString = "";
+                String receiveString;
 
                 //add each dog profile from the file to the array list
                 while ( (receiveString = bufferedReader.readLine()) != null ) {

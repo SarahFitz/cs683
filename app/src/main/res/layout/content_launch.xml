@@ -72,7 +72,7 @@
         android:layout_height="wrap_content"
         android:text="@string/buttonLetsGetStarted"
         android:id="@+id/getStarted"
-        android:background="@android:color/holo_green_light"
+        android:background="@drawable/custom_button_green"
         android:paddingLeft="6dp"
         android:paddingRight="6dp"
         tools:targetApi="ice_cream_sandwich"
