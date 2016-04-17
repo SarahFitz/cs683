@@ -118,14 +118,17 @@ public class TrickResultsActivity extends AppCompatActivity {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     //the user has access to telephone status. show share button.
                     Button shareResults = (Button) findViewById(R.id.shareResultsButton);
-                    shareResults.setVisibility(View.VISIBLE);
-
+                    if (shareResults != null) {
+                        shareResults.setVisibility(View.VISIBLE);
+                    }
                 } else {
                     //telephone permissions not granted. hide the share button
                     Button shareResults = (Button) findViewById(R.id.shareResultsButton);
-                    shareResults.setVisibility(View.INVISIBLE);
+                    if (shareResults != null) {
+                        shareResults.setVisibility(View.INVISIBLE);
+                    }
                 }
-                return;
+                break;
             }
         }
     }
@@ -143,19 +146,22 @@ public class TrickResultsActivity extends AppCompatActivity {
      * check that the phone has network signal,
      * then call the sendSMS method
      */
-    private void sendSmsMessage(String phoneNumber){
+    private void sendSmsMessage(String phoneNumber) {
         //check for network signal and call state
-        if(isTelephoneNetworkAvailable(telMgr) && "IDLE".equals(getCallState(telMgr))){
+        if (isTelephoneNetworkAvailable(telMgr) && "IDLE".equals(getCallState(telMgr))) {
             sendSMS(phoneNumber, "I just trained my dog using the Training " +
                     "Routine Generator app! " + this.dogName + " completed " + this.successfulTricks
                     + " out of " + this.totalTricks + " total tricks!");
-        }else{
+        } else {
             Toast.makeText(getBaseContext(), "No network signal or call in progress. SMS not sent", Toast.LENGTH_SHORT).show();
         }
+    }
+
+
     /**
      * Utilize the SMSManager to send an SMS message directly from this activity
-     * @param phoneNumber
-     * @param message
+     * @param phoneNumber - number to send SMS message to
+     * @param message - string text to send as the SMS message body
      */
     void sendSMS(String phoneNumber, String message)
     {
@@ -224,8 +230,8 @@ public class TrickResultsActivity extends AppCompatActivity {
 
     /**
      * Return string representation of the current call status
-     * @param telMgr
-     * @return
+     * @param telMgr - telephonyManager object
+     * @return - string representatino of call status
      */
     private String getCallState(final TelephonyManager telMgr){
         int callState = telMgr.getCallState();
@@ -246,8 +252,8 @@ public class TrickResultsActivity extends AppCompatActivity {
 
     /**
      * Return true if a network is available
-     * @param telMgr
-     * @return
+     * @param telMgr - telephonyManager object
+     * @return - network availability
      */
     private boolean isTelephoneNetworkAvailable(final TelephonyManager telMgr) {
         return ((!(telMgr.getNetworkOperator() != null && telMgr.getNetworkOperator().equals(""))));
