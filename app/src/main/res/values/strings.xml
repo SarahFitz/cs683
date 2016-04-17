@@ -27,4 +27,7 @@
     <string name="next">Next</string>
     <string name="title_activity_select_dog">SelectDog</string>
     <string name="title_activity_trick_results">TrickResultsActivity</string>
+    <string name="selectDogText">Please select a dog from the list below, or add a new one.</string>
+    <string name="deleteDogButton">Delete Dog</string>
+    <string name="selectDogButton">Select Dog</string>
 </resources>
