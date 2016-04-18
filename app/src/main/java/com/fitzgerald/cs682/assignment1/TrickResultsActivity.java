@@ -156,6 +156,23 @@ public class TrickResultsActivity extends AppCompatActivity {
                         shareResults.setVisibility(View.INVISIBLE);
                     }
                 }
+
+            }
+            case INTERNET_PERMISSION_REQUEST_CODE:{
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    //the user has access to telephone status. show trainingTips button.
+                    Button trainingTips = (Button) findViewById(R.id.trainingTips);
+                    if (trainingTips != null) {
+                        trainingTips.setVisibility(View.VISIBLE);
+                    }
+                } else {
+                    //telephone permissions not granted. hide the trainingTips button
+                    Button trainingTips = (Button) findViewById(R.id.trainingTips);
+                    if (trainingTips != null) {
+                        trainingTips.setVisibility(View.INVISIBLE);
+                    }
+                }
                 break;
             }
         }
