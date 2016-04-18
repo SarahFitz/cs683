@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Assignment1</string>
     <string name="homeWelcomeMessage">Welcome to the training routine generator!</string>
-    <string name="trickEntryInstructions">Please select the tricks below which your dog already knows.</string>
+    <string name="trickEntryInstructions">Please select the tricks which your dog already knows.</string>
     <string name="sit">Sit</string>
     <string name="stay">Stay</string>
     <string name="down">Down</string>
@@ -30,4 +30,5 @@
     <string name="selectDogText">Please select a dog from the list below, or add a new one.</string>
     <string name="deleteDogButton">Delete Dog</string>
     <string name="selectDogButton">Select Dog</string>
+    <string name="title_activity_training_tips">Training Tips</string>
 </resources>

@@ -32,9 +32,11 @@ public class TrickResultsActivity extends AppCompatActivity {
     private int totalTricks = 0;
     private String dogName = "";
     private TelephonyManager telMgr;
+    private long routineId = 0;
 
     private static final int PICK_CONTACT_REQUEST = 1;
-    private static final int PERMISSION_REQUEST_CODE = 2;
+    private static final int TELEPHONE_PERMISSION_REQUEST_CODE = 2;
+    private static final int INTERNET_PERMISSION_REQUEST_CODE = 3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,11 +46,12 @@ public class TrickResultsActivity extends AppCompatActivity {
 
         //check if the user has necessary permissions when launching the page
         checkTelephonyPermissions();
+        checkInternetPermissions();
         telMgr = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
 
         //get the list of tricks that the user selected from the previous page
         Intent intent = getIntent();
-        long routineId = intent.getExtras().getLong("routineId");
+        this.routineId = intent.getExtras().getLong("routineId");
         Log.i(TAG, "dogId = " + routineId);
 
         if(routineId >= 0) {
@@ -85,6 +88,19 @@ public class TrickResultsActivity extends AppCompatActivity {
                 }
             });
         }
+
+        //starts the process over by taking the user to the dog selection page
+        Button trainingtips = (Button) findViewById(R.id.trainingTips);
+        if(trainingtips != null) {
+            final Intent trainingTipsIntent = new Intent(this, TrainingTips.class);
+            trainingtips.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    Log.i(TAG, "trainingTips onClick");
+                    trainingTipsIntent.putExtra("routineId", routineId);
+                    startActivity(trainingTipsIntent);
+                }
+            });
+        }
     }
 
     /**
@@ -101,7 +117,19 @@ public class TrickResultsActivity extends AppCompatActivity {
                     new String[]{
                             Manifest.permission.READ_PHONE_STATE,
                             Manifest.permission.SEND_SMS
-                    }, PERMISSION_REQUEST_CODE);
+                    }, TELEPHONE_PERMISSION_REQUEST_CODE);
+        }
+    }
+
+    private void checkInternetPermissions(){
+        if(ContextCompat.checkSelfPermission(this, Manifest.permission.INTERNET) != PackageManager.PERMISSION_GRANTED &&
+                ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_NETWORK_STATE) != PackageManager.PERMISSION_GRANTED){
+            //request the permissions
+            ActivityCompat.requestPermissions(this,
+                    new String[]{
+                            Manifest.permission.INTERNET,
+                            Manifest.permission.ACCESS_NETWORK_STATE
+                    }, INTERNET_PERMISSION_REQUEST_CODE);
         }
     }
     /**
@@ -113,7 +141,7 @@ public class TrickResultsActivity extends AppCompatActivity {
     public void onRequestPermissionsResult(int requestCode,
                                            String permissions[], int[] grantResults) {
         switch (requestCode) {
-            case PERMISSION_REQUEST_CODE: {
+            case TELEPHONE_PERMISSION_REQUEST_CODE: {
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     //the user has access to telephone status. show share button.
@@ -187,7 +215,7 @@ public class TrickResultsActivity extends AppCompatActivity {
                                 Toast.LENGTH_SHORT).show();
                         break;
                     case SmsManager.RESULT_ERROR_GENERIC_FAILURE:
-                        Toast.makeText(getBaseContext(), "Generic failure",
+                        Toast.makeText(getBaseContext(), "SMS failed",
                                 Toast.LENGTH_SHORT).show();
                         break;
                     case SmsManager.RESULT_ERROR_NO_SERVICE:

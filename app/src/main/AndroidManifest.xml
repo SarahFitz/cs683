@@ -4,6 +4,8 @@
 
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -11,7 +13,6 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity
             android:name=".LaunchActivity"
             android:label="Training Routine Generator">
@@ -21,17 +22,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".SelectDogActivity"
             android:label="Select Your Dog" />
-
         <activity
             android:name=".TrickSelectionActivity"
-            android:label="Set Your Tricks" >
+            android:label="Set Your Tricks">
             <intent-filter>
-                <action android:name="selectDogTricks"/>
-                <category android:name="android.intent.category.DEFAULT"/>
+                <action android:name="selectDogTricks" />
+
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
@@ -48,6 +48,9 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
+        <activity
+            android:name=".TrainingTips"
+            android:label="@string/title_activity_training_tips"></activity>
     </application>
 
 </manifest>
