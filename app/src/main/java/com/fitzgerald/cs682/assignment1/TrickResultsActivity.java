@@ -110,8 +110,10 @@ public class TrickResultsActivity extends AppCompatActivity {
      * If access is not granted, the function will be hidden from the UI
      */
     private void checkTelephonyPermissions(){
-        if(ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED &&
-                ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED){
+        if(ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE)
+                != PackageManager.PERMISSION_GRANTED &&
+                ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS)
+                != PackageManager.PERMISSION_GRANTED){
             //request the permissions
             ActivityCompat.requestPermissions(this,
                     new String[]{
@@ -122,8 +124,10 @@ public class TrickResultsActivity extends AppCompatActivity {
     }
 
     private void checkInternetPermissions(){
-        if(ContextCompat.checkSelfPermission(this, Manifest.permission.INTERNET) != PackageManager.PERMISSION_GRANTED &&
-                ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_NETWORK_STATE) != PackageManager.PERMISSION_GRANTED){
+        if(ContextCompat.checkSelfPermission(this, Manifest.permission.INTERNET)
+                != PackageManager.PERMISSION_GRANTED &&
+                ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_NETWORK_STATE)
+                != PackageManager.PERMISSION_GRANTED){
             //request the permissions
             ActivityCompat.requestPermissions(this,
                     new String[]{
@@ -143,7 +147,8 @@ public class TrickResultsActivity extends AppCompatActivity {
         switch (requestCode) {
             case TELEPHONE_PERMISSION_REQUEST_CODE: {
                 // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                if (grantResults.length > 0 && grantResults[0] ==
+                        PackageManager.PERMISSION_GRANTED) {
                     //the user has access to telephone status. show share button.
                     Button shareResults = (Button) findViewById(R.id.shareResultsButton);
                     if (shareResults != null) {
@@ -160,7 +165,8 @@ public class TrickResultsActivity extends AppCompatActivity {
             }
             case INTERNET_PERMISSION_REQUEST_CODE:{
                 // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                if (grantResults.length > 0 && grantResults[0] ==
+                        PackageManager.PERMISSION_GRANTED) {
                     //the user has access to telephone status. show trainingTips button.
                     Button trainingTips = (Button) findViewById(R.id.trainingTips);
                     if (trainingTips != null) {
@@ -380,14 +386,17 @@ public class TrickResultsActivity extends AppCompatActivity {
             TextView result = new TextView(
                     new ContextThemeWrapper(this, R.style.TrickResultTextView), null, 0);
             result.setBackground(getResources().getDrawable(R.drawable.trick_skipped_background));
-            String text = "The trick " + trickName + " was " + trickResult + "!";
-            result.setText(text);
+
 
             //set background based on trick result
             if(trickResult.equals("Skipped")){
                 result.setTextColor(getResources().getColor(R.color.pink2));
+                String text = "The trick, " + trickName + ", was skipped.";
+                result.setText(text);
             }else{
                 result.setTextColor(getResources().getColor(R.color.green1));
+                String text = "The trick, " + trickName + ", was successful!";
+                result.setText(text);
                 this.successfulTricks ++;
             }
 

@@ -1,5 +1,6 @@
 package com.fitzgerald.cs682.assignment1;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -16,6 +17,7 @@ public class TrainingTips extends AppCompatActivity {
     private static final String TAG = "appLog TrainingTips";
     private long routineId;
 
+    @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,13 +32,16 @@ public class TrainingTips extends AppCompatActivity {
                 getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
 
-        final String TRAINING_TIPS_URL = "https://www.cesarsway.com/dog-training/obedience/5-essential-commands-you-can-teach-your-dog";
+        final String TRAINING_TIPS_URL = "https://www.cesarsway.com/dog-training/"+
+                "obedience/5-essential-commands-you-can-teach-your-dog";
         //check if there is a network conntection
         if (networkInfo != null && networkInfo.isConnected()) {
             //display the website in the webview
             WebView webView = (WebView) findViewById(R.id.webView);
-            webView.getSettings().setJavaScriptEnabled(true);
-            webView.loadUrl(TRAINING_TIPS_URL);
+            if(webView != null){
+                webView.getSettings().setJavaScriptEnabled(true);
+                webView.loadUrl(TRAINING_TIPS_URL);
+            }
         } else {
             Toast.makeText(getBaseContext(), "No network connection available.",
                     Toast.LENGTH_SHORT).show();

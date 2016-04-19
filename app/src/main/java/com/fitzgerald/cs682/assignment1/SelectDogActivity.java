@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -90,6 +91,8 @@ public class SelectDogActivity extends AppCompatActivity {
                         outputStream.write(profileString.getBytes());
                     }
                 }
+                Toast.makeText(getBaseContext(), "Dog, " + name + ", was removed",
+                        Toast.LENGTH_SHORT).show();
                 outputStream.close();
             } catch (Exception e) {
                 e.printStackTrace();
