@@ -58,4 +58,14 @@
         android:layout_marginRight="36dp"
         android:layout_marginEnd="36dp" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Training Tips"
+        android:background="@drawable/custom_button_blue"
+        android:id="@+id/trainingTips"
+        android:layout_marginTop="31dp"
+        android:layout_below="@+id/shareResultsButton"
+        android:layout_centerHorizontal="true" />
+
 </RelativeLayout>

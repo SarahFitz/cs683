@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 
 import java.io.FileOutputStream;
 import java.util.ArrayList;
@@ -23,11 +24,6 @@ public class TrickSelectionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trick_selection);
 
-        //get the dog name that the user entered from the previous page
-        Intent intent = getIntent();
-        this.dogName = intent.getExtras().getString("dogName");
-        Log.i(TAG, "the dog name is: "+dogName);
-
         //create intent to instantiate new activity
         final Intent selectDogIntent = new Intent(this, SelectDogActivity.class);
 
@@ -41,7 +37,7 @@ public class TrickSelectionActivity extends AppCompatActivity {
                     List<String> tricks = validateSubmission();
 
                     //add profile to internal file storage
-                    addDogProfile(dogName, tricks);
+                    addDogProfile(tricks);
 
                     //check that tricks were selected
                     if(tricks != null && tricks.size() > 0){
@@ -71,6 +67,21 @@ public class TrickSelectionActivity extends AppCompatActivity {
         return tricks;
     }
 
+    private String validateDogName(){
+        EditText dogNameField = (EditText) findViewById(R.id.dogNameField);
+                if(dogNameField != null){
+                    String name = dogNameField.getText().toString();
+
+                    if(name != null && !name.isEmpty()){
+                this.dogName = name;
+            }else{
+                //TODO: some sort of error
+            }
+        }
+
+        return this.dogName;
+    }
+
     @NonNull
     private List<CheckBox> getCheckBoxes() {
         List<CheckBox> checkBoxes = new ArrayList<>();
@@ -84,9 +95,12 @@ public class TrickSelectionActivity extends AppCompatActivity {
         return checkBoxes;
     }
 
-    private void addDogProfile(String name, List<String> tricks){
+    private void addDogProfile(List<String> tricks){
+        this.dogName = validateDogName();
+        Log.i(TAG, "the dog name is: "+ this.dogName);
+
         String filename = "dogProfiles.txt";
-        String string = name + "," + android.text.TextUtils.join(",", tricks)+"/n";
+        String string = this.dogName + "," + android.text.TextUtils.join(",", tricks)+"/n";
         FileOutputStream outputStream = null;
         try {
             outputStream = openFileOutput(filename, Context.MODE_APPEND | Context.MODE_PRIVATE);

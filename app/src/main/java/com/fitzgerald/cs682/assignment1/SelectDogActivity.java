@@ -3,13 +3,14 @@ package com.fitzgerald.cs682.assignment1;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -31,23 +32,19 @@ public class SelectDogActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_dog);
 
+        FloatingActionButton addDogFloatingButton = (FloatingActionButton) findViewById(R.id.addDogActionButton);
+        addDogFloatingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.i(TAG, "addNewDog onClick");
+                addDog();
+            }
+        });
+
         setSpinnerData();
 
-        //Set up click event for ADD dog button
-        Button addNewDog = (Button) findViewById(R.id.addNewDogButton);
-        if(addNewDog != null) {
-            addNewDog.setOnClickListener(new View.OnClickListener() {
-                //when button is clicked, start the next activity
-                public void onClick(View v) {
-                    Log.i(TAG, "addNewDog onClick");
-                    addDog();
-                }
-            });
-        }
-
-
         //Set up click event for SELECT dog button
-        Button selectDogButton = (Button) findViewById(R.id.selectDogButton);
+        Button selectDogButton = (Button) findViewById(R.id.selectDogNameButton);
         if(selectDogButton != null){
             selectDogButton.setOnClickListener(new View.OnClickListener() {
                 //when button is clicked, start the next activity
@@ -72,18 +69,8 @@ public class SelectDogActivity extends AppCompatActivity {
     }
 
     private void addDog(){
-        EditText dogNameField = (EditText) findViewById(R.id.newDogName);
-        if(dogNameField != null){
-            String name = dogNameField.getText().toString();
-
-            if(name == null || name.isEmpty()){
-                //TODO: error
-            }else{
-                final Intent trickSelectIntent = new Intent("selectDogTricks");
-                trickSelectIntent.putExtra("dogName", name);
-                startActivity(trickSelectIntent);
-            }
-        }
+        final Intent trickSelectIntent = new Intent("selectDogTricks");
+        startActivity(trickSelectIntent);
     }
 
     private void deleteDog(){
@@ -104,6 +91,8 @@ public class SelectDogActivity extends AppCompatActivity {
                         outputStream.write(profileString.getBytes());
                     }
                 }
+                Toast.makeText(getBaseContext(), "Dog, " + name + ", was removed",
+                        Toast.LENGTH_SHORT).show();
                 outputStream.close();
             } catch (Exception e) {
                 e.printStackTrace();
@@ -145,7 +134,7 @@ public class SelectDogActivity extends AppCompatActivity {
 
         Spinner spinner = (Spinner) findViewById(R.id.dogSpinner);
         Button deleteDogButton = (Button) findViewById(R.id.deleteDogButton);
-        Button selectDogButton = (Button) findViewById(R.id.selectDogButton);
+        Button selectDogButton = (Button) findViewById(R.id.selectDogNameButton);
 
         if(spinner != null && deleteDogButton != null && selectDogButton != null){
             if(dogNames.size() <= 0){
@@ -204,7 +193,7 @@ public class SelectDogActivity extends AppCompatActivity {
                     String[] profiles = android.text.TextUtils.split(receiveString, "/n");
                     for(int i = 0; i<profiles.length-1; i++){
                         String[] profile = android.text.TextUtils.split(profiles[i], ",");
-                        Log.i(TAG, "Dog profile from FILE : " + profile[i]);
+                        Log.i(TAG, "Dog profile from FILE : " + profiles[i]);
                         dogProfiles.add(new ArrayList<>(Arrays.asList(profile)));
                     }
                 }
