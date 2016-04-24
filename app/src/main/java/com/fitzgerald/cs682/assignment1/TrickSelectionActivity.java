@@ -1,6 +1,8 @@
 package com.fitzgerald.cs682.assignment1;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -37,14 +39,21 @@ public class TrickSelectionActivity extends AppCompatActivity {
                     List<String> tricks = validateSubmission();
 
                     //add profile to internal file storage
-                    addDogProfile(tricks);
+                    boolean isNameValid = validateDogName();
+
 
                     //check that tricks were selected
-                    if(tricks != null && tricks.size() > 0){
+                    if((tricks != null && tricks.size() > 0) && isNameValid){
                         Log.i(TAG, "submitTrickButton onClick startActivity");
+                        addDogProfile(tricks, dogName);
                         startActivity(selectDogIntent);
+                    }else if(!isNameValid){
+                        createErrorAlert("Please provide a valid dog name.");
+                    }else if(tricks == null || tricks.size() <= 0){
+                        createErrorAlert("Please select at least one trick.");
                     }else{
-                        //TODO: some error scenario
+                        createErrorAlert("Something went wrong. " +
+                                "Please restart the app and try again.");
                     }
                 }
             });
@@ -67,19 +76,38 @@ public class TrickSelectionActivity extends AppCompatActivity {
         return tricks;
     }
 
-    private String validateDogName(){
+    private boolean validateDogName(){
         EditText dogNameField = (EditText) findViewById(R.id.dogNameField);
-                if(dogNameField != null){
-                    String name = dogNameField.getText().toString();
+            if(dogNameField != null){
+                String name = dogNameField.getText().toString();
 
-                    if(name != null && !name.isEmpty()){
-                this.dogName = name;
-            }else{
-                //TODO: some sort of error
-            }
+                if(name != null && !name.isEmpty()){
+                    this.dogName = name;
+                }else{
+                    return false;
+                }
         }
 
-        return this.dogName;
+        return true;
+    }
+
+    /**
+     * Helper method to create and show error dialog messages
+     * @param message
+     */
+    private void createErrorAlert(String message){
+        // Use the Builder class for convenient dialog construction
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(message)
+                .setPositiveButton("Continue", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+        // Create the AlertDialog object and show it
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 
     @NonNull
@@ -95,12 +123,11 @@ public class TrickSelectionActivity extends AppCompatActivity {
         return checkBoxes;
     }
 
-    private void addDogProfile(List<String> tricks){
-        this.dogName = validateDogName();
-        Log.i(TAG, "the dog name is: "+ this.dogName);
+    private void addDogProfile(List<String> tricks, String dogName){
+        Log.i(TAG, "the dog name is: "+ dogName);
 
         String filename = "dogProfiles.txt";
-        String string = this.dogName + "," + android.text.TextUtils.join(",", tricks)+"/n";
+        String string = dogName + "," + android.text.TextUtils.join(",", tricks)+"/n";
         FileOutputStream outputStream = null;
         try {
             outputStream = openFileOutput(filename, Context.MODE_APPEND | Context.MODE_PRIVATE);

@@ -1,5 +1,7 @@
 package com.fitzgerald.cs682.assignment1;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -31,8 +33,6 @@ public class TrickStartActivity extends AppCompatActivity {
         dogName = intent.getExtras().getString("dogName");
 
         if(tricks !=null && tricks.size()>0){
-            //TODO: validate populated list and not null
-
             Log.i(TAG, "The dog knows the tricks: " + android.text.TextUtils.join(", ", tricks));
 
             //Add the text message based on the number of tricks the user selected
@@ -89,26 +89,50 @@ public class TrickStartActivity extends AppCompatActivity {
                             Log.i(TAG, "num tricks = "+numTricks);
                         }
 
-                        //generate the list of tricks based on the number they chose
-                        ArrayList<String> toDoTricks = new ArrayList<>();
-                        Random rand = new Random();
-                        Log.i(TAG, "Random tricks list");
-                        for( int i = 0; i < numTricks; i++){
-                            toDoTricks.add(tricks.get(rand.nextInt(tricks.size())));
-                            Log.i(TAG, "Random tricks = "+toDoTricks.get(i));
-                        }
+                        if (numTricks == 0){
+                            createErrorAlert("Please select at least one trick.");
+                        }else{
+                            //generate the list of tricks based on the number they chose
+                            ArrayList<String> toDoTricks = new ArrayList<>();
+                            Random rand = new Random();
+                            Log.i(TAG, "Random tricks list");
+                            for( int i = 0; i < numTricks; i++){
+                                toDoTricks.add(tricks.get(rand.nextInt(tricks.size())));
+                                Log.i(TAG, "Random tricks = "+toDoTricks.get(i));
+                            }
 
-                        //pass the list of tricks to do to the next activity
-                        trickIntent.putStringArrayListExtra("toDoTricks", toDoTricks);
-                        trickIntent.putExtra("dogName", dogName);
-                        startActivity(trickIntent);
+                            //pass the list of tricks to do to the next activity
+                            trickIntent.putStringArrayListExtra("toDoTricks", toDoTricks);
+                            trickIntent.putExtra("dogName", dogName);
+                            startActivity(trickIntent);
+                        }
                     }
                 });
             }
+        }else{
+            createErrorAlert("Something went wrong.");
         }
 
     }
 
+    /**
+     * Helper method to create and show error dialog messages
+     * @param message
+     */
+    private void createErrorAlert(String message){
+        // Use the Builder class for convenient dialog construction
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(message)
+                .setPositiveButton("Continue", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+        // Create the AlertDialog object and show it
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
 
 
     @Override
