@@ -125,12 +125,6 @@ public class TrickActivity extends AppCompatActivity implements  TrickActivityFr
         Log.i(TAG, "onStop");
 
         if(this.tricksCompleted < this.tricksTotal){
-
-            Intent notificationIntent = new Intent(this, TrickActivity.class);
-            PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
-                    notificationIntent, 0);
-
-
             // theNotification has title, text, and icon as implemented
             Notification theNotification = new Notification.Builder(this)
                     .setContentTitle("Trick Routine Generator")
