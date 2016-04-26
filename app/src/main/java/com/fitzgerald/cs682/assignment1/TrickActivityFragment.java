@@ -48,6 +48,7 @@ public class TrickActivityFragment extends Fragment {
     public interface TrickListener {
         //This passes the completed trick info back to the activity
         void tricksCompleted(ArrayList<ArrayList <String>> trickCompleteList);
+        void getTrickData(int tricksCompleted, int tricksTotal);
     }
 
     //This is created, but not implemented yet
@@ -147,6 +148,7 @@ public class TrickActivityFragment extends Fragment {
         trickCompleteData.add(this.tricksList.get(currentTrickNum));
         trickCompleteData.add(message);
         this.trickCompleteList.add(trickCompleteData);
+        activityCallback.getTrickData(this.trickCompleteList.size(), this.tricksList.size());
     }
 
     /**

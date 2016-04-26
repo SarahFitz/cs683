@@ -1,6 +1,10 @@
 package com.fitzgerald.cs682.assignment1;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -14,6 +18,8 @@ public class TrickActivity extends AppCompatActivity implements  TrickActivityFr
 
     private static final String TAG = "appLog TrickActivity";
     private String dogName;
+    private int tricksCompleted;
+    private int tricksTotal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +89,11 @@ public class TrickActivity extends AppCompatActivity implements  TrickActivityFr
         startActivity(trickResultIntent);
     }
 
+    public void getTrickData(int tricksCompleted, int tricksTotal){
+        this.tricksCompleted = tricksCompleted;
+        this.tricksTotal = tricksTotal;
+    }
+
     @Override
     public void onBackPressed()
     {
@@ -112,6 +123,29 @@ public class TrickActivity extends AppCompatActivity implements  TrickActivityFr
     protected void onStop() {
         super.onStop();
         Log.i(TAG, "onStop");
+
+        if(this.tricksCompleted < this.tricksTotal){
+            // theNotification has title, text, and icon as implemented
+            Notification theNotification = new Notification.Builder(this)
+                    .setContentTitle("Trick Routine Generator")
+                    .setContentText("Hey, come back! " + this.dogName + " has " +
+                            (this.tricksTotal - this.tricksCompleted) + " tricks left.")
+                    .setSmallIcon(R.drawable.launcher_image)
+                    .setContentIntent(PendingIntent.getActivity(this,
+                            0, new Intent(this, TrickActivity.class)
+                                    .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
+                                            Intent.FLAG_ACTIVITY_SINGLE_TOP),
+                            PendingIntent.FLAG_CANCEL_CURRENT))
+                    .setAutoCancel(true)
+                    .build();
+
+            theNotification.flags |= Notification.FLAG_ONGOING_EVENT;
+
+            // theNotification is on the Notification bar and has ID MY_NOTIFICATION_ID
+            final NotificationManager notificationManager = (NotificationManager)
+                    this.getSystemService(Context.NOTIFICATION_SERVICE);
+            notificationManager.notify(1, theNotification);
+        }
     }
 
     @Override
